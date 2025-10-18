@@ -1,3 +1,6 @@
+/* ===============================
+   GLOBAL STYLES (shared)
+================================= */
 * {
   box-sizing: border-box;
   font-family: "Trebuchet MS", sans-serif;
@@ -7,12 +10,23 @@
 
 body {
   background-color: #f3f3f3;
+  color: #333;
+  text-align: center;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  align-items: center; /* center everything horizontally */
+  min-height: 100vh;
 }
 
+body > * {
+  max-width: 375px; /* typical mobile width */
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ===============================
+   LOGIN PAGE STYLES
+================================= */
 .login-container {
   width: 320px;
   background-color: white;
@@ -20,6 +34,7 @@ body {
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   text-align: center;
+  margin: auto;
 }
 
 .top-section {
@@ -27,23 +42,19 @@ body {
   padding: 20px 10px;
 }
 
-/* ✅ FIXED: Variable now controls logo size */
 .logo-img {
-  --logo-size: 100px; /* 👈 change this to resize */
+  --logo-size: 100px; 
   width: var(--logo-size);
   height: var(--logo-size);
   background-color: #552222;
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   margin: 0 auto 10px;
-  font-weight: bold;
-  overflow: hidden; /* ensures image fits neatly in the circle */
+  overflow: hidden;
 }
 
-/* ✅ ensures the image scales to the container */
 .logo-img img {
   width: 100%;
   height: 100%;
@@ -115,4 +126,127 @@ button {
 
 button:hover {
   background-color: #fbd276;
+}
+
+/* ===============================
+   HOMEPAGE STYLES
+================================= */
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: flex-end; /* push content to the right */
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Center Logo Section */
+.center-logo {
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  align-items: center;
+  margin: 20px 0;
+}
+
+.center-logo-img {
+  width: 180px;
+  height: auto;
+  border-radius: 50%;
+}
+
+/* Workout Buttons Section */
+.workout-section {
+  display: flex;
+  justify-content: center; /* center the row of cards */
+  gap: 10px;
+  margin: 15px 0;
+  flex-wrap: wrap; /* allows wrapping on very small screens */
+}
+
+.workout-card {
+  flex: 0 1 45%; /* each card takes ~45% of row */
+  max-width: 160px;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #f0f0f0;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.workout-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.workout-card p {
+  background: rgba(0,0,0,0.6);
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  margin: 0;
+}
+
+.workout-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Quote Section */
+.quote-section {
+  display: flex;
+  justify-content: center; /* center quote */
+  margin: 20px 0;
+  padding: 0 10px;
+}
+
+.quote {
+  font-family: "Brush Script MT", cursive;
+  font-size: 28px;
+  color: #000;
+  text-align: center;
+}
+
+/* Popular Times Section */
+.popular-times {
+  display: flex;
+  justify-content: center; /* center the chart image */
+  margin: 20px 0;
+}
+
+.popular-times img {
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+/* Footer Wave */
+.footer-wave {
+  background-color: #e1735e;
+  height: 80px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  margin-top: 30px;
+}
+.page-container {
+  max-width: 375px; /* same as body > * */
+  width: 100%;
+  margin: 0 auto;
+  border: 4px solid #552222; /* border color */
+  border-radius: 15px; /* optional rounded corners */
+  overflow: hidden; /* keep rounded corners neat */
+  background-color: white; /* optional for contrast */
 }
