@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Post to Community</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Phone container */
+    .phone {
+      width: 375px;
+      height: 750px;
+      background-color: #d1715f;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 18px;
+      left: 16px;
+      background-color: #d9d9d9;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      color: #444;
+      cursor: pointer;
+      border: none;
+      z-index: 10;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    }
+
+    .container {
+      /* extra top padding so content sits below the back button */
+      padding: 70px 20px 20px 20px;
+      color: white;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+      margin-top: 6px;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 120px;
+      resize: none;
+    }
+
+    /* Collaborator + Schedule Buttons */
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .collab-button, .schedule-button {
+      background-color: #5e3434;
+      color: white;
+      border: none;
+      font-weight: bold;
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      flex: 1;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .collab-button:hover, .schedule-button:hover {
+      background-color: #452525;
+    }
+
+    .photo-difficulty {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .photo-upload {
+      background-color: #d9d9d9;
+      color: black;
+      width: 140px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .difficulty {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 6px;
+      font-size: 28px;
+      color: black;
+    }
+
+    .bottom-wave {
+      background-color: white;
+      height: 120px;
+      border-top-left-radius: 60px;
+      border-top-right-radius: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .post-button {
+      background-color: #5e3434;
+      color: white;
+      border: none;
+      font-size: 16px;
+      padding: 14px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 80%;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .post-button:hover {
+      background-color: #452525;
+    }
+
+    /* small responsiveness so it scales on smaller viewports */
+    @media (max-width: 420px) {
+      .phone { transform: scale(0.95); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="phone">
+    <!-- Back Button (visual only) -->
+    <button class="back-button" aria-label="Go back">←</button>
+
+    <div class="container">
+      <label for="caption">Caption</label>
+      <input type="text" id="caption" placeholder="">
+
+      <label for="post">Post</label>
+      <textarea id="post" placeholder=""></textarea>
+
+      <!-- Collaborator + Schedule Buttons -->
+      <div class="button-row">
+        <button class="collab-button">Add Collaborators +</button>
+        <button class="schedule-button">Schedule Post</button>
+      </div>
+
+      <div class="photo-difficulty">
+        <div>
+          <label>Add Photo</label>
+          <div class="photo-upload">+</div>
+        </div>
+
+        <div class="difficulty">
+          <label>Difficulty</label>
+          <div class="stars" aria-hidden="true">
+            <span>☆</span>
+            <span>☆</span>
+            <span>☆</span>
+            <span>☆</span>
+            <span>☆</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-wave">
+      <button class="post-button">Post To Community</button>
+    </div>
+  </div>
+
+</body>
+</html>
