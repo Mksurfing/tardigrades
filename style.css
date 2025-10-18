@@ -252,28 +252,41 @@ button:hover {
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: 50px; /* below header */
-  right: 15px;
-  background-color: #fdd995;
-  border: 1px solid #552222;
-  border-radius: 10px;
-  display: none;
+  position: fixed;       /* overlay on screen */
+  top: 0;
+  right: -100%;          /* hidden off-screen initially */
+  width: 60%;            /* takes right 60% of screen */
+  height: 100%;
+  background-color: #E26D5C;
+  display: flex;
   flex-direction: column;
-  width: 140px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  justify-content: center; /* vertically center links */
+  align-items: center;
+  gap: 30px;               /* space between links */
+  padding: 20px;
+  transition: right 0.3s ease;
   z-index: 1000;
 }
 
-.dropdown-menu a {
-  padding: 10px;
-  text-decoration: none;
-  color: black;
-  font-weight: bold;
-  text-align: left;
+/* Show menu */
+.dropdown-menu.active {
+  right: 0;
 }
 
-.dropdown-menu a:hover {
-  background-color: #fbd276;
+.dropdown-menu a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
   border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.dropdown-menu a:hover {
+  background-color: #F2A78C; /* lighter complement of #E26D5C */
+  color: #552222;             /* dark text for contrast */
 }
