@@ -6,31 +6,55 @@
   <title>Jimmy's Fitness Profile</title>
 <style>
   body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to bottom, #d8a85c, #c7934c);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* CHANGE to min-height */
-  min-height: 100vh; 
-  margin: 0;
-  /* ADD a small padding to prevent content from touching screen edges */
-  padding: 20px 0; 
-}
+    font-family: Arial, sans-serif;
+    /* CHANGE 1: Overall page background is now WHITE */
+    background: white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    margin: 0;
+    padding: 20px 0; 
+  }
 
   .profile-card {
-    background: #f5e3c1;
+    /* CHANGE 2: App background color is now #FFE1A8 with a darker gradient */
+    background: linear-gradient(to bottom, #FFE1A8, #D8BD8A);
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Adjusted shadow for light background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
     width: 340px;
     padding: 20px;
-    /* NEW LINE ADDED HERE */
     position: relative;
-    }
+    /* Removed custom border */
+    border: none;
+  }
+
+  /* NEW CSS FOR HOME BUTTON */
+  .home-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    /* Using a coordinating color */
+    background-color: #c7934c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .home-btn:hover {
+    background-color: #b57f3b;
+  }
+
 
   .header {
     text-align: center;
     margin-bottom: 15px;
+    /* Changed border color back to standard grey for light background */
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
 
@@ -56,7 +80,8 @@
     right: -10px;
     top: 0;
     font-size: 18px;
-    background: #f1c27d;
+    /* Adjusting edit icon color to fit new light background */
+    background: #c7934c; 
     border-radius: 50%;
     padding: 3px;
     cursor: pointer;
@@ -68,8 +93,18 @@
     width: 100%;
     padding: 6px;
     border-radius: 6px;
+    /* Input fields are back to white background and standard border */
+    background-color: white; 
     border: 1px solid #ccc;
+    /* Text color is black for readability */
+    color: #333; 
   }
+
+  /* Text colors are set to black for readability on the light card background */
+  .password-section label, .challenge p, .experience p, .info-grid label, .bio-section p, h2, h4 {
+    color: #333; 
+  }
+
 
   .challenge {
     margin-top: 10px;
@@ -85,7 +120,10 @@
     margin-bottom: 6px;
     padding: 5px;
     border-radius: 6px;
+    /* Input fields are back to white background and standard border */
+    background-color: white;
     border: 1px solid #ccc;
+    color: #333;
   }
 
   .info-grid {
@@ -100,12 +138,21 @@
   .info-grid input {
     width: 100%;
     padding: 4px;
+    /* Input fields are back to white background and standard border */
+    background-color: white;
     border: 1px solid #ccc;
     border-radius: 6px;
+    color: #333;
+  }
+  
+  /* Override default text color for pre-filled inputs */
+  input[type="text"], input[type="email"], input[type="password"] {
+    color: #333;
   }
 
   .arrow {
-    color: red;
+    /* CHANGE 3: Arrow color is set to an orange for contrast */
+    color: #FF8C00; 
     font-weight: bold;
     margin-right: 5px;
   }
@@ -118,10 +165,12 @@
     width: 100%;
     height: 60px;
     border-radius: 8px;
+    /* Textarea is back to white background and standard border */
+    background-color: white;
     border: 1px solid #ccc;
     padding: 6px;
     resize: none;
-    background-color: #fff;
+    color: #333;
   }
 
   .save-btn {
@@ -153,7 +202,6 @@
     <button class="home-btn" onclick="window.location.href='HomePage.html'">Home</button>
     <div class="header">
       <div class="avatar-container">
-        <!-- Default profile icon -->
         <img id="profileImage" src="/pictures/blankprofilepic 1.png" alt="Profile Avatar" class="avatar">
         <span class="edit-icon" onclick="document.getElementById('fileInput').click()">✏️</span>
         <input type="file" id="fileInput" accept="image/*">
