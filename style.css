@@ -250,3 +250,43 @@ button:hover {
   overflow: hidden; /* keep rounded corners neat */
   background-color: white; /* optional for contrast */
 }
+
+.dropdown-menu {
+  position: fixed;       /* overlay on screen */
+  top: 0;
+  right: -100%;          /* hidden off-screen initially */
+  width: 60%;            /* takes right 60% of screen */
+  height: 100%;
+  background-color: #E26D5C;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically center links */
+  align-items: center;
+  gap: 30px;               /* space between links */
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+/* Show menu */
+.dropdown-menu.active {
+  right: 0;
+}
+
+.dropdown-menu a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.dropdown-menu a:hover {
+  background-color: #F2A78C; /* lighter complement of #E26D5C */
+  color: #552222;             /* dark text for contrast */
+}
