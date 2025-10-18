@@ -250,3 +250,30 @@ button:hover {
   overflow: hidden; /* keep rounded corners neat */
   background-color: white; /* optional for contrast */
 }
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px; /* below header */
+  right: 15px;
+  background-color: #fdd995;
+  border: 1px solid #552222;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  width: 140px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.dropdown-menu a {
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  text-align: left;
+}
+
+.dropdown-menu a:hover {
+  background-color: #fbd276;
+  border-radius: 10px;
+}
