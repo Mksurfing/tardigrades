@@ -1,17 +1,10 @@
-var menuBtn = document.querySelector('.menu-btn');
-var dropdown = document.querySelector('.dropdown-menu');
-
-menuBtn.addEventListener('click', function(e) {
-  e.stopPropagation();
-  dropdown.classList.toggle('active'); // toggle sliding menu
+const menuBtn = document.querySelector('.menu-btn');
+const dropdown = document.querySelector('.dropdown-menu');
+menuBtn.addEventListener('click', ()=>{ 
+  dropdown.classList.toggle('active'); 
 });
-
-// Close dropdown if clicking outside
-document.addEventListener('click', function() {
-  dropdown.classList.remove('active');
-});
-
-// Prevent closing when clicking inside menu
-dropdown.addEventListener('click', function(e) {
-  e.stopPropagation();
+document.addEventListener('click',(e)=>{
+  if(!menuBtn.contains(e.target) && !dropdown.contains(e.target)){
+    dropdown.classList.remove('active');
+  }
 });
