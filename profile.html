@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jimmy's Fitness Profile</title>
+<style>
+  body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #d8a85c, #c7934c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* CHANGE to min-height */
+  min-height: 100vh; 
+  margin: 0;
+  /* ADD a small padding to prevent content from touching screen edges */
+  padding: 20px 0; 
+}
+
+  .profile-card {
+    background: #f5e3c1;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 340px;
+    padding: 20px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+  }
+
+  .avatar-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #999;
+    background-color: #ddd;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .edit-icon {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    font-size: 18px;
+    background: #f1c27d;
+    border-radius: 50%;
+    padding: 3px;
+    cursor: pointer;
+  }
+
+  .password-section input {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .challenge {
+    margin-top: 10px;
+  }
+
+  .experience {
+    margin-top: 10px;
+  }
+
+  .experience input {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+    padding: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  .info-grid {
+    margin-top: 10px;
+  }
+
+  .info-grid label {
+    display: block;
+    margin: 5px 0;
+  }
+
+  .info-grid input {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .arrow {
+    color: red;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .bio-section {
+    margin-top: 10px;
+  }
+
+  .bio-section textarea {
+    width: 100%;
+    height: 60px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 6px;
+    resize: none;
+    background-color: #fff;
+  }
+
+  .save-btn {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 8px;
+    background-color: #c7934c;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .save-btn:hover {
+    background-color: #b57f3b;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+</style>
+
+</head>
+<body>
+  <div class="profile-card">
+    <div class="header">
+      <div class="avatar-container">
+        <!-- Default profile icon -->
+        <img id="profileImage" src="/pictures/blankprofilepic 1.png" alt="Profile Avatar" class="avatar">
+        <span class="edit-icon" onclick="document.getElementById('fileInput').click()">✏️</span>
+        <input type="file" id="fileInput" accept="image/*">
+      </div>
+      <h2>@Jimmys_Fitness</h2>
+    </div>
+
+    <div class="body">
+      <div class="password-section">
+        <h4>Change Password:</h4>
+        <label>Old:</label>
+        <input type="password" placeholder="Enter old password">
+        <label>New:</label>
+        <input type="password" placeholder="Enter new password">
+      </div>
+
+      <div class="challenge">
+        <p>Challenge Participation?</p>
+        <label><input type="radio" name="challenge" checked> Yes</label>
+        <label><input type="radio" name="challenge"> No</label>
+      </div>
+
+      <div class="experience">
+        <p>Experience:</p>
+        <input type="text" id="exp1" placeholder="Experience 1 (e.g., Weightlifting)">
+        <input type="text" id="exp2" placeholder="Experience 2 (e.g., Cardio)">
+        <input type="text" id="exp3" placeholder="Experience 3 (e.g., CrossFit)">
+        <input type="text" id="exp4" placeholder="Experience 4 (e.g., Yoga)">
+        <input type="text" id="exp5" placeholder="Experience 5 (e.g., HIIT)">
+      </div>
+
+      <div class="info-grid">
+        <label><span class="arrow">➤</span> Name: <input type="text" id="nameInput" value="Jimmy Fitman"></label>
+        <label><span class="arrow">➤</span> Birthday: <input type="text" id="birthdayInput" value="01/01/1995"></label>
+        <label><span class="arrow">➤</span> Email: <input type="email" id="emailInput" value="jimmy@example.com"></label>
+        <label><span class="arrow">➤</span> Gender: <input type="text" id="genderInput" value="Male"></label>
+        <label><span class="arrow">➤</span> Zip Code: <input type="text" id="zipInput" value="28213"></label>
+        <label><span class="arrow">➤</span> University: <input type="text" id="universityInput" value="UNC Charlotte"></label>
+        <label><span class="arrow">➤</span> Gym Address: <input type="text" id="gymInput" value="123 Fitness Way"></label>
+      </div>
+
+      <div class="bio-section">
+        <p><strong>Bio:</strong></p>
+        <textarea id="bioInput">Hey my name is Jimmy and I love to workout!</textarea>
+      </div>
+
+      <button class="save-btn" onclick="saveProfile()">Save Profile</button>
+    </div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const profileImage = document.getElementById('profileImage');
+
+    fileInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          profileImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function saveProfile() {
+      const name = document.getElementById('nameInput').value;
+      const birthday = document.getElementById('birthdayInput').value;
+      const email = document.getElementById('emailInput').value;
+      const gender = document.getElementById('genderInput').value;
+      const zip = document.getElementById('zipInput').value;
+      const university = document.getElementById('universityInput').value;
+      const gym = document.getElementById('gymInput').value;
+      const bio = document.getElementById('bioInput').value;
+
+      const experiences = [
+        document.getElementById('exp1').value,
+        document.getElementById('exp2').value,
+        document.getElementById('exp3').value,
+        document.getElementById('exp4').value,
+        document.getElementById('exp5').value
+      ];
+
+      alert("Profile Saved!\n\n" +
+        "Name: " + name +
+        "\nBirthday: " + birthday +
+        "\nEmail: " + email +
+        "\nGender: " + gender +
+        "\nZip Code: " + zip +
+        "\nUniversity: " + university +
+        "\nGym Address: " + gym +
+        "\nExperiences: " + experiences.filter(e => e.trim() !== '').join(', ') +
+        "\nBio: " + bio);
+    }
+  </script>
+</body>
+</html>
