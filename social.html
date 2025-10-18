@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>User Cards App View</title>
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: "Trebuchet MS", sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #d8d8d8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* The app "frame" */
+  .app-container {
+    background-color: #f3f3f3;
+    width: 100%;
+    max-width: 430px; /* mimics phone width */
+    min-height: 100vh;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header {
+    text-align: center;
+    padding: 25px 0 10px;
+    width: 100%;
+  }
+
+  .search-bar {
+    width: 85%;
+    max-width: 380px;
+    padding: 12px 18px;
+    border-radius: 25px;
+    border: none;
+    background-color: #d3d3d3;
+    font-size: 1.1rem;
+    outline: none;
+  }
+
+  .sort-options {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .sort-options p {
+    font-weight: bold;
+    color: #552222;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .options label {
+    font-size: 0.95rem;
+    color: #552222;
+    cursor: pointer;
+  }
+
+  .options input[type="radio"] {
+    accent-color: #552222;
+    transform: scale(1.2);
+    margin-right: 4px;
+  }
+
+  .wave-section {
+    width: 100%;
+    overflow: hidden;
+    margin-top: -25px;
+  }
+
+  .wave {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: -6px;
+  }
+
+  main {
+    background: linear-gradient(to bottom, #e1735e, #e1735e);
+    width: 100%;
+    padding: 30px 8% 60px;
+    border-top-left-radius: 40% 10%;
+    box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.15);
+    flex-grow: 1;
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f3f3f3;
+    border-radius: 20px;
+    padding: 15px 18px;
+    margin: 14px 0;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .profile-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #552222;
+    flex-shrink: 0;
+    background-color: #d3d3d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-icon img {
+    width: 70%;
+    opacity: 0.7;
+  }
+
+  .info {
+    flex-grow: 1;
+    margin-left: 12px;
+  }
+
+  .info h4 {
+    color: #552222;
+    font-size: 1rem;
+    margin-bottom: 3px;
+  }
+
+  .info p {
+    color: #000;
+    font-size: 0.9rem;
+  }
+
+  .mail-icon {
+    width: 45px;
+    height: 35px;
+    background-color: #fdd995;
+    border-radius: 6px;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .mail-icon::before,
+  .mail-icon::after {
+    content: "";
+    position: absolute;
+    background: #552222;
+    height: 2px;
+    width: 70%;
+    top: 50%;
+    left: 15%;
+  }
+
+  .mail-icon::before { transform: rotate(25deg); }
+  .mail-icon::after { transform: rotate(-25deg); }
+
+  .show-more {
+    text-align: right;
+    font-weight: bold;
+    color: white;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+
+  .featured {
+    margin-top: 30px;
+    color: white;
+  }
+
+  .featured h4 {
+    margin-bottom: 15px;
+  }
+
+  .featured-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .featured-item {
+    background-color: #f3f3f3;
+    width: 45%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  }
+</style>
+</head>
+<body>
+  <div class="app-container">
+
+    <header>
+      <input type="text" placeholder="Search" class="search-bar" />
+      <div class="sort-options">
+        <p>Sort by</p>
+        <div class="options">
+          <label><input type="radio" name="sort"> Recent</label>
+          <label><input type="radio" name="sort"> Popular</label>
+          <label><input type="radio" name="sort"> Name</label>
+        </div>
+      </div>
+    </header>
+
+    <section class="wave-section">
+      <svg class="wave" viewBox="0 0 1440 320">
+        <path fill="#f3f3f3" fill-opacity="1" 
+          d="M0,224L60,208C120,192,240,160,360,144C480,128,600,128,720,149.3C840,171,960,213,1080,213.3C1200,213,1320,171,1380,149.3L1440,128L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
+        </path>
+      </svg>
+    </section>
+
+    <main>
+      <div class="card">
+        <div class="profile-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Default Profile">
+        </div>
+        <div class="info">
+          <h4>Name</h4>
+          <p>description...</p>
+        </div>
+        <div class="mail-icon"></div>
+      </div>
+
+      <div class="card">
+        <div class="profile-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Default Profile">
+        </div>
+        <div class="info">
+          <h4>Name</h4>
+          <p>description...</p>
+        </div>
+        <div class="mail-icon"></div>
+      </div>
+
+      <div class="card">
+        <div class="profile-icon">
+          <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Default Profile">
+        </div>
+        <div class="info">
+          <h4>Name</h4>
+          <p>description...</p>
+        </div>
+        <div class="mail-icon"></div>
+      </div>
+
+      <p class="show-more">Show more</p>
+
+      <section class="featured">
+        <h4>Featured Posts</h4>
+        <div class="featured-grid">
+          <div class="featured-item"></div>
+          <div class="featured-item"></div>
+          <div class="featured-item"></div>
+        </div>
+      </section>
+    </main>
+
+  </div>
+</body>
+</html>
