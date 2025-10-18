@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jimmy's Fitness Profile</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jimmy's Fitness Profile</title>
 <style>
-  body {
+  * {
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    /* CHANGE 1: Overall page background is now WHITE */
-    background: white; 
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: #ffffff; /* outside phone */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; 
-    margin: 0;
-    padding: 20px 0; 
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 
-  .profile-card {
-    /* CHANGE 2: App background color is now #FFE1A8 with a darker gradient */
+  .phone {
+    width: 375px;
+    height: 750px;
     background: linear-gradient(to bottom, #FFE1A8, #D8BD8A);
-    border-radius: 12px;
-    /* Adjusted shadow for light background */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-    width: 340px;
-    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.25);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
     position: relative;
-    /* Removed custom border */
-    border: none;
+    padding: 20px;
   }
 
-  /* NEW CSS FOR HOME BUTTON */
   .home-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    /* Using a coordinating color */
+    top: 15px;
+    right: 15px;
+    padding: 6px 12px;
     background-color: #c7934c;
     color: white;
     border: none;
@@ -44,25 +46,20 @@
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
+    z-index: 10;
   }
 
-  .home-btn:hover {
-    background-color: #b57f3b;
-  }
+  .home-btn:hover { background-color: #b57f3b; }
 
-
-  .header {
-    text-align: center;
-    margin-bottom: 15px;
-    /* Changed border color back to standard grey for light background */
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
-
+  .profile-card {
+    width: 100%;
+    margin-top: 50px; /* space for home button */
   }
 
   .avatar-container {
     position: relative;
     display: inline-block;
+    margin-bottom: 10px;
   }
 
   .avatar {
@@ -71,8 +68,9 @@
     border-radius: 50%;
     border: 2px solid #999;
     background-color: #ddd;
-    object-fit: contain;
-    object-position: center;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
   }
 
   .edit-icon {
@@ -80,98 +78,37 @@
     right: -10px;
     top: 0;
     font-size: 18px;
-    /* Adjusting edit icon color to fit new light background */
-    background: #c7934c; 
+    background: #c7934c;
     border-radius: 50%;
     padding: 3px;
     cursor: pointer;
   }
 
-  .password-section input {
-    display: block;
+  h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  h4, p, label { color: #333; text-align: left; }
+
+  input[type="text"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 6px;
     margin-bottom: 10px;
-    width: 100%;
-    padding: 6px;
     border-radius: 6px;
-    /* Input fields are back to white background and standard border */
-    background-color: white; 
     border: 1px solid #ccc;
-    /* Text color is black for readability */
-    color: #333; 
-  }
-
-  /* Text colors are set to black for readability on the light card background */
-  .password-section label, .challenge p, .experience p, .info-grid label, .bio-section p, h2, h4 {
-    color: #333; 
-  }
-
-
-  .challenge {
-    margin-top: 10px;
-  }
-
-  .experience {
-    margin-top: 10px;
-  }
-
-  .experience input {
-    display: block;
-    width: 100%;
-    margin-bottom: 6px;
-    padding: 5px;
-    border-radius: 6px;
-    /* Input fields are back to white background and standard border */
     background-color: white;
-    border: 1px solid #ccc;
     color: #333;
   }
 
-  .info-grid {
-    margin-top: 10px;
+  textarea { height: 60px; resize: none; }
+
+  .password-section, .challenge, .experience, .info-grid, .bio-section {
+    margin-top: 15px;
   }
 
-  .info-grid label {
-    display: block;
-    margin: 5px 0;
-  }
-
-  .info-grid input {
-    width: 100%;
-    padding: 4px;
-    /* Input fields are back to white background and standard border */
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    color: #333;
-  }
-  
-  /* Override default text color for pre-filled inputs */
-  input[type="text"], input[type="email"], input[type="password"] {
-    color: #333;
-  }
-
-  .arrow {
-    /* CHANGE 3: Arrow color is set to an orange for contrast */
-    color: #FF8C00; 
-    font-weight: bold;
-    margin-right: 5px;
-  }
-
-  .bio-section {
-    margin-top: 10px;
-  }
-
-  .bio-section textarea {
-    width: 100%;
-    height: 60px;
-    border-radius: 8px;
-    /* Textarea is back to white background and standard border */
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 6px;
-    resize: none;
-    color: #333;
-  }
+  .arrow { color: #FF8C00; font-weight: bold; margin-right: 5px; }
 
   .save-btn {
     display: block;
@@ -187,115 +124,93 @@
     transition: background-color 0.3s;
   }
 
-  .save-btn:hover {
-    background-color: #b57f3b;
-  }
+  .save-btn:hover { background-color: #b57f3b; }
 
-  input[type="file"] {
-    display: none;
+  input[type="file"] { display: none; }
+
+  @media (max-width: 420px) {
+    .phone { transform: scale(0.95); }
   }
 </style>
-
 </head>
 <body>
+
+<div class="phone">
+
+  <button class="home-btn" onclick="window.location.href='HomePage.html'">Home</button>
+
   <div class="profile-card">
-    <button class="home-btn" onclick="window.location.href='HomePage.html'">Home</button>
-    <div class="header">
-      <div class="avatar-container">
-        <img id="profileImage" src="/pictures/blankprofilepic 1.png" alt="Profile Avatar" class="avatar">
-        <span class="edit-icon" onclick="document.getElementById('fileInput').click()">✏️</span>
-        <input type="file" id="fileInput" accept="image/*">
-      </div>
-      <h2>@Jimmys_Fitness</h2>
+
+    <div class="avatar-container">
+      <img id="profileImage" src="/pictures/blankprofilepic 1.png" alt="Profile Avatar" class="avatar">
+      <span class="edit-icon" onclick="document.getElementById('fileInput').click()">✏️</span>
+      <input type="file" id="fileInput" accept="image/*">
     </div>
 
-    <div class="body">
-      <div class="password-section">
-        <h4>Change Password:</h4>
-        <label>Old:</label>
-        <input type="password" placeholder="Enter old password">
-        <label>New:</label>
-        <input type="password" placeholder="Enter new password">
-      </div>
+    <h2>@Jimmys_Fitness</h2>
 
-      <div class="challenge">
-        <p>Challenge Participation?</p>
-        <label><input type="radio" name="challenge" checked> Yes</label>
-        <label><input type="radio" name="challenge"> No</label>
-      </div>
-
-      <div class="experience">
-        <p>Experience:</p>
-        <input type="text" id="exp1" placeholder="Experience 1 (e.g., Weightlifting)">
-        <input type="text" id="exp2" placeholder="Experience 2 (e.g., Cardio)">
-        <input type="text" id="exp3" placeholder="Experience 3 (e.g., CrossFit)">
-        <input type="text" id="exp4" placeholder="Experience 4 (e.g., Yoga)">
-        <input type="text" id="exp5" placeholder="Experience 5 (e.g., HIIT)">
-      </div>
-
-      <div class="info-grid">
-        <label><span class="arrow">➤</span> Name: <input type="text" id="nameInput" value="Jimmy Fitman"></label>
-        <label><span class="arrow">➤</span> Birthday: <input type="text" id="birthdayInput" value="01/01/1995"></label>
-        <label><span class="arrow">➤</span> Email: <input type="email" id="emailInput" value="jimmy@example.com"></label>
-        <label><span class="arrow">➤</span> Gender: <input type="text" id="genderInput" value="Male"></label>
-        <label><span class="arrow">➤</span> Zip Code: <input type="text" id="zipInput" value="28213"></label>
-        <label><span class="arrow">➤</span> University: <input type="text" id="universityInput" value="UNC Charlotte"></label>
-        <label><span class="arrow">➤</span> Gym Address: <input type="text" id="gymInput" value="123 Fitness Way"></label>
-      </div>
-
-      <div class="bio-section">
-        <p><strong>Bio:</strong></p>
-        <textarea id="bioInput">Hey my name is Jimmy and I love to workout!</textarea>
-      </div>
-
-      <button class="save-btn" onclick="saveProfile()">Save Profile</button>
+    <div class="password-section">
+      <h4>Change Password:</h4>
+      <label>Old:</label>
+      <input type="password" placeholder="Enter old password">
+      <label>New:</label>
+      <input type="password" placeholder="Enter new password">
     </div>
+
+    <div class="challenge">
+      <p>Challenge Participation?</p>
+      <label><input type="radio" name="challenge" checked> Yes</label>
+      <label><input type="radio" name="challenge"> No</label>
+    </div>
+
+    <div class="experience">
+      <p>Experience:</p>
+      <input type="text" placeholder="Experience 1">
+      <input type="text" placeholder="Experience 2">
+      <input type="text" placeholder="Experience 3">
+      <input type="text" placeholder="Experience 4">
+      <input type="text" placeholder="Experience 5">
+    </div>
+
+    <div class="info-grid">
+      <label><span class="arrow">➤</span> Name: <input type="text" value="Jimmy Fitman"></label>
+      <label><span class="arrow">➤</span> Birthday: <input type="text" value="01/01/1995"></label>
+      <label><span class="arrow">➤</span> Email: <input type="email" value="jimmy@example.com"></label>
+      <label><span class="arrow">➤</span> Gender: <input type="text" value="Male"></label>
+      <label><span class="arrow">➤</span> Zip Code: <input type="text" value="28213"></label>
+      <label><span class="arrow">➤</span> University: <input type="text" value="UNC Charlotte"></label>
+      <label><span class="arrow">➤</span> Gym Address: <input type="text" value="123 Fitness Way"></label>
+    </div>
+
+    <div class="bio-section">
+      <p><strong>Bio:</strong></p>
+      <textarea>Hey my name is Jimmy and I love to workout!</textarea>
+    </div>
+
+    <button class="save-btn" onclick="saveProfile()">Save Profile</button>
   </div>
 
-  <script>
-    const fileInput = document.getElementById('fileInput');
-    const profileImage = document.getElementById('profileImage');
+</div>
 
-    fileInput.addEventListener('change', function () {
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          profileImage.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+<script>
+const fileInput = document.getElementById('fileInput');
+const profileImage = document.getElementById('profileImage');
 
-    function saveProfile() {
-      const name = document.getElementById('nameInput').value;
-      const birthday = document.getElementById('birthdayInput').value;
-      const email = document.getElementById('emailInput').value;
-      const gender = document.getElementById('genderInput').value;
-      const zip = document.getElementById('zipInput').value;
-      const university = document.getElementById('universityInput').value;
-      const gym = document.getElementById('gymInput').value;
-      const bio = document.getElementById('bioInput').value;
+fileInput.addEventListener('change', function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      profileImage.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
-      const experiences = [
-        document.getElementById('exp1').value,
-        document.getElementById('exp2').value,
-        document.getElementById('exp3').value,
-        document.getElementById('exp4').value,
-        document.getElementById('exp5').value
-      ];
+function saveProfile() {
+  alert("Profile saved!");
+}
+</script>
 
-      alert("Profile Saved!\n\n" +
-        "Name: " + name +
-        "\nBirthday: " + birthday +
-        "\nEmail: " + email +
-        "\nGender: " + gender +
-        "\nZip Code: " + zip +
-        "\nUniversity: " + university +
-        "\nGym Address: " + gym +
-        "\nExperiences: " + experiences.filter(e => e.trim() !== '').join(', ') +
-        "\nBio: " + bio);
-    }
-  </script>
 </body>
 </html>
