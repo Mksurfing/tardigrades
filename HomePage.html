@@ -1,60 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tardigrades Powerhouse - Home</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tardigrades Powerhouse - Home</title>
+<style>
+* { box-sizing: border-box; margin:0; padding:0; font-family: "Trebuchet MS", sans-serif; }
+
+body {
+  background-color: #f3f3f3;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.phone {
+  width: 375px;
+  height: 750px;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.25);
+  display:flex;
+  flex-direction:column;
+  position: relative;
+  background: linear-gradient(to bottom, #f3f3f3, #E26D5C); /* lighter at top, darker at bottom */
+  background-attachment: fixed; 
+}
+
+/* Header */
+.header {
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  padding:10px 15px;
+  position: relative;
+  z-index: 10;
+  background: transparent;
+}
+
+.menu-btn {
+  background:none;
+  border:none;
+  font-size:28px;
+  cursor:pointer;
+  z-index: 10;
+}
+
+/* Dropdown only covers right half and opaque */
+.dropdown-menu {
+  position: absolute; /* relative to .phone */
+  top: 0;
+  right: -50%; /* hidden off the right side */
+  width: 50%;  /* half of phone width */
+  height: 100%;
+  background-color: rgba(226,109,92,0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+  transition: right 0.3s ease;
+  z-index: 1000; /* on top of content inside phone */
+}
+.dropdown-menu.active {
+  right: 0; /* slide in */
+}
+.dropdown-menu a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.dropdown-menu a:hover {
+  background-color: #F2A78C;
+  color: #552222;
+}
+
+/* Scrollable content */
+.container {
+  flex:1;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  padding: 10px 15px;
+  position: relative;
+  z-index: 5;
+}
+
+/* Center Logo */
+.center-logo { display:flex; justify-content:center; align-items:center; margin:10px 0; }
+.center-logo-img { width:180px; height:auto; border-radius:50%; }
+
+/* Workout Buttons */
+.workout-section { display:flex; justify-content:center; gap:10px; margin:10px 0; flex-wrap:wrap; }
+.workout-card { flex:0 1 45%; max-width:160px; border-radius:15px; overflow:hidden; background:#f0f0f0; text-align:center; cursor:pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.workout-card img { width:100%; height:120px; object-fit:cover; }
+.workout-card p { background: rgba(0,0,0,0.6); color:white; font-weight:bold; padding:5px; margin:0; }
+.workout-card:hover { transform: translateY(-5px); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+
+/* Quote Section */
+.quote-section { display:flex; justify-content:center; margin:10px 0; padding:0 10px; }
+.quote { font-family:"Brush Script MT", cursive; font-size:28px; color:#000; text-align:center; }
+
+/* Popular Times */
+.popular-times { display:flex; justify-content:center; margin:10px 0; }
+.popular-times img { width:90%; max-width:600px; border-radius:10px; }
+
+/* Mobile scaling */
+@media (max-width:420px) { .phone { transform:scale(0.95); } }
+</style>
 </head>
 <body>
-<div class = "page-container">
+<div class="phone">
   <!-- Header -->
   <header class="header">
     <button class="menu-btn">&#9776;</button>
-    <div class="dropdown-menu">
-        <a href="profile.html">Profile</a>
-        <a href="leaderboard.html">Leaderboard</a>
-        <a href="#">Muscle Diagrams</a>
-  </div>
   </header>
-
-  <!-- Center Logo -->
-  <section class="center-logo">
-    <img src="images/AppLogo.jpg" alt="Tardigrades Powerhouse Logo" class="center-logo-img">
-  </section>
-
-  <!-- Workout Buttons -->
-  <section class="workout-section">
-    <a href="plan.html" class="workout-card">
-      <img src="images/workout1.jpg" alt="Plan Your Workout">
-      <p>Plan Your Workout</p>
-    </a>
-
-    <a href="social.html" class="workout-card">
-      <img src="images/workout2.jpg" alt="Social">
-      <p>Social</p>
-    </a>
-
-    <a href="diarypage.html" class="workout-card">
-      <img src="images/workout2.jpg" alt="Diary Workout">
-      <p>Diary Workout</p>
-    </a>
-  </section>
-
-  <!-- Quote Section -->
-  <section class="quote-section">
-    <p class="quote">"Inspirational Quote"</p>
-  </section>
-
-  <!-- Popular Times Image Placeholder -->
-  <section class="popular-times">
-    <!-- Replace with actual chart image -->
-    <img src="images/popular-times.jpg" alt="Popular Times Graph">
-  </section>
-
-  <!-- Footer Wave -->
-  <div class="footer-wave"></div>
+  <!-- Dropdown overlay -->
+<div class="dropdown-menu">
+  <a href="profile.html">Profile</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="#">Muscle Diagrams</a>
 </div>
-<script src = "script.js"></script>
+
+
+  <!-- Scrollable Content -->
+  <div class="container">
+    <!-- Center Logo -->
+    <section class="center-logo">
+      <img src="images/AppLogo.jpg" alt="Tardigrades Powerhouse Logo" class="center-logo-img">
+    </section>
+
+    <!-- Workout Buttons -->
+    <section class="workout-section">
+      <a href="plan.html" class="workout-card">
+        <img src="images/workout1.jpg" alt="Plan Your Workout">
+        <p>Plan Your Workout</p>
+      </a>
+
+      <a href="social.html" class="workout-card">
+        <img src="images/workout2.jpg" alt="Social">
+        <p>Social</p>
+      </a>
+
+      <a href="diarypage.html" class="workout-card">
+        <img src="images/workout2.jpg" alt="Diary Workout">
+        <p>Diary Workout</p>
+      </a>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section">
+      <p class="quote">"Inspirational Quote"</p>
+    </section>
+
+    <!-- Popular Times Image -->
+    <section class="popular-times">
+      <img src="images/popular-times.jpg" alt="Popular Times Graph">
+    </section>
+  </div>
+</div>
+
+<script>
+const menuBtn = document.querySelector('.menu-btn');
+const dropdown = document.querySelector('.dropdown-menu');
+menuBtn.addEventListener('click', ()=>{ dropdown.classList.toggle('active'); });
+document.addEventListener('click',(e)=>{
+  if(!menuBtn.contains(e.target) && !dropdown.contains(e.target)){
+    dropdown.classList.remove('active');
+  }
+});
+</script>
 </body>
 </html>
