@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muscle App</title>
+    <style>
+        /* Small local styles for the interactive controls */
+        .muscle-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 12px;
+            z-index: 12;
+            position: relative;
+        }
+
+        .muscle-buttons button {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            padding: 8px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        .muscle-buttons button:focus {
+            outline: 3px solid #a5d6a7;
+            outline-offset: 2px;
+        }
+
+        .sr-only { /* simple visually-hidden helper */
+            position: absolute !important;
+            height: 1px; width: 1px;
+            overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap; border: 0; padding: 0; margin: -1px;
+        }
+    </style>
+</head>
+<body style="font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0;">
+    
+    <!-- Header removed per user request (was a green banner) -->
+
+    <div class="content-wrapper" style="padding: 10px; padding-top: 20px;">
+        
+        <div class="diagram-section" style="background-color: #ffffff; padding: 15px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); margin-bottom: 0; text-align: center;">
+            <h2 style="font-size: 1.1em; color: #333; margin-top: 0; margin-bottom: 10px;">Anterior View</h2>
+            
+          <img src="images/muscle-anterior.png" 
+              alt="Human Muscle Diagram showing major anterior muscles with callouts" 
+              usemap="#musclemap"
+              role="img"
+              aria-describedby="muscle-system-info"
+              style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+            
+            <map name="musclemap">
+                <area shape="poly" coords="200,100,250,110,260,180,210,190" href="#shoulders-info" alt="Shoulders" data-muscle="shoulders">
+                <area shape="rect" coords="260,150,340,220" href="#chest-info" alt="Chest" data-muscle="chest">
+                <area shape="rect" coords="300,450,380,580" href="#quads-info" alt="Quads" data-muscle="quads">
+                </map>
+                <!-- Accessible controls: keyboard-friendly buttons that mirror the image map regions -->
+                <div class="muscle-buttons" aria-label="Muscle controls" role="toolbar">
+                    <button type="button" data-muscle="shoulders">Shoulders</button>
+                    <button type="button" data-muscle="chest">Chest</button>
+                    <button type="button" data-muscle="quads">Quads</button>
+                </div>
+        </div>
+
+        <div class="info-container-wrapper" style="position: relative; background-color: #ffe0b2; padding: 40px 15px 15px; border-radius: 12px; margin-top: 20px;">
+            
+            <style>
+                .info-container-wrapper::before {
+                    content: '';
+                    position: absolute;
+                    top: -20px; /* Adjusted wave height for mobile */
+                    left: 0;
+                    right: 0;
+                    height: 40px; 
+                    background: #ffe0b2; 
+                    /* Create the wavy effect */
+                    border-radius: 100% 100% 0 0 / 80px 80px 0 0; 
+                    z-index: 1; 
+                }
+            </style>
+            
+            <div class="info-box" style="background-color: #ffffff; border-radius: 8px; padding: 15px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #38761d; font-size: 1em; margin-top: 0;">Information about the muscular system</h3>
+                <p id="muscle-system-info" style="margin: 0; font-size: 0.9em; line-height: 1.4;">The muscular system provides movement, posture, and heat generation. It's broadly categorized into skeletal, cardiac, and smooth muscle tissues.</p>
+            </div>
+            
+            <div class="info-box" style="background-color: #ffffff; border-radius: 8px; padding: 15px; margin-bottom: 0; min-height: 120px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #38761d; font-size: 1em; margin-top: 0;">Specific muscle selected and exercises</h3>
+                <div id="selected-muscle-name" style="font-weight:600; color:#1b5e20; margin-bottom:6px;">No muscle selected</div>
+                <p id="selected-muscle-info" style="margin: 0; font-size: 0.9em; line-height: 1.4;">Tap on a muscle in the diagram above (or use the buttons) to view its function and suggested exercises.</p>
+            </div>
+        </div>
+    </div>
+        <div class="sr-only" aria-live="polite" id="aria-announcer">No muscle selected</div>
+    <script>
+        // Small dataset of muscles. You can expand this with more muscles and richer content.
+        const muscleData = {
+            shoulders: {
+                name: 'Shoulders (Deltoids)',
+                function: 'Assist with arm abduction, rotation and overhead motions.',
+                exercises: ['Overhead press', 'Lateral raises', 'Front raises']
+            },
+            chest: {
+                name: 'Chest (Pectoralis Major)',
+                function: 'Primary muscle for pushing movements and arm flexion across the body.',
+                exercises: ['Bench press', 'Push-ups', 'Chest flyes']
+            },
+            quads: {
+                name: 'Quadriceps',
+                function: 'Extend the knee and aid in hip flexion; important for walking, running, and squatting.',
+                exercises: ['Squats', 'Lunges', 'Leg press']
+            }
+        };
+
+        const infoNameEl = document.getElementById('selected-muscle-name');
+        const infoEl = document.getElementById('selected-muscle-info');
+
+        function showMuscle(muscleKey) {
+            const data = muscleData[muscleKey];
+            if (!data) {
+                infoNameEl.textContent = 'No muscle selected';
+                infoEl.textContent = 'Tap on a muscle in the diagram above (or use the buttons) to view its function and suggested exercises.';
+                return;
+            }
+
+            infoNameEl.textContent = data.name;
+            infoEl.innerHTML = `<strong>Primary function:</strong> ${data.function}<br><strong>Recommended exercises:</strong> ${data.exercises.join(', ')}`;
+        }
+
+        // Wire up area clicks (image map)
+        // Make the <area> elements interactive and keyboard-accessible where possible
+        document.querySelectorAll('map[name="musclemap"] area').forEach(area => {
+            // make focusable in browsers that support it
+            try { area.setAttribute('tabindex', '0'); } catch (e) {}
+
+            area.addEventListener('click', (e) => {
+                e.preventDefault();
+                const key = area.dataset.muscle;
+                if (key) showMuscle(key);
+            });
+
+            area.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const key = area.dataset.muscle;
+                    if (key) showMuscle(key);
+                }
+            });
+        });
+
+        // Wire up accessible buttons
+        document.querySelectorAll('.muscle-buttons button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.dataset.muscle;
+                showMuscle(key);
+            });
+        });
+
+        // Initialize default state
+        showMuscle();
+
+        // Announce changes for screen readers
+        const announcer = document.getElementById('aria-announcer');
+        const originalShowMuscle = showMuscle;
+        window.showMuscle = function(muscleKey) {
+            originalShowMuscle(muscleKey);
+            const text = muscleKey && muscleData[muscleKey] ? muscleData[muscleKey].name + ' selected' : 'No muscle selected';
+            if (announcer) announcer.textContent = text;
+        };
+    </script>
+</body>
+</html>
