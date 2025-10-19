@@ -7,8 +7,6 @@
   background-color: #d3d3d3;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
   font-size: 18px;
   color: #444;
   cursor: pointer;
@@ -16,8 +14,8 @@
   justify-content: center;
   align-items: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-  margin-right: auto;
 }
+
 
   </style>
   
@@ -29,10 +27,18 @@
 
     <!-- Group Header -->
     <!-- Group Header with back button inside -->
-    <div style="background-color: #ddd; display: flex; align-items: center; padding: 10px; border-radius: 20px; margin-bottom: 20px; font-weight: bold;">
-        <button class="back-button" aria-label="Go back" onclick="history.back()">←</button>
-        <span style="flex-grow: 1; text-align: center; margin-left: -32px;">Your Group</span>
-    </div>
+    <!-- Group Header with back button inside -->
+    <div style="background-color: #ddd; position: relative; padding: 10px 0; border-radius: 20px; margin-bottom: 20px; font-weight: bold; text-align: center;">
+        <!-- Back Button in Top Left -->
+        <button class="back-button" aria-label="Go back" onclick="history.back()" 
+            style="position: absolute; top: 8px; left: 10px; width: 32px; height: 32px; font-size: 18px;">
+            ←
+        </button>
+
+  <!-- Centered Title -->
+  <span style="font-size: 18px;">Your Group</span>
+</div>
+
 
     <!-- Icons Row -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -44,14 +50,20 @@
 
       <!-- Member Avatars -->
       <div style="display: flex; gap: 20px;">
-        <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
-            <img src="pictures/blankprofilepic 1.png" style="width: 100%; height: 100%; object-fit: cover;">
+
+        <div style="position: relative; width: 50px; height: 50px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                <img src="pictures/blankprofilepic 1.png" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="position: absolute; bottom: -4px; right: -4px; background: green; color: white; font-weight: bold; border-radius: 50%; width: 18px; height: 18px; font-size: 14px; display: flex; align-items: center; justify-content: center;">+</div>
         </div>
 
-        <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
-            <img src="pictures/blankprofilepic 1.png" style="width: 100%; height: 100%; object-fit: cover;">
+        <div style="position: relative; width: 50px; height: 50px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                <img src="pictures/blankprofilepic 1.png" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="position: absolute; bottom: -4px; right: -4px; background: red; color: white; font-weight: bold; border-radius: 50%; width: 18px; height: 18px; font-size: 14px; display: flex; align-items: center; justify-content: center;">−</div>
         </div>
-
       </div>
     </div>
 
