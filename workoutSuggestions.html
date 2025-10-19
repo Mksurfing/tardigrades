@@ -14,16 +14,31 @@
     border-radius: 40px;
     box-shadow: 0 0 30px rgba(0,0,0,0.2);
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    position: relative;
     padding: 20px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   ">
 
+    <!-- Home button in top-right -->
+    <button onclick="window.location.href='HomePage.html'" style="
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #264653;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    ">Home</button>
+
     <!-- Header -->
-    <h1 style="color: white; font-size: 24px; font-weight: bold; margin-top: 20px; text-align: center; line-height: 1.4;">
+    <h1 style="color: white; font-size: 24px; font-weight: bold; margin-top: 60px; text-align: center; line-height: 1.4;">
       Use AI to curate your<br>workout for today!
     </h1>
 
@@ -59,7 +74,6 @@
       overflow-y: auto;
       color: #333;
     ">
-      <!-- This is where AI response text would go -->
       Your workout plan will appear here after you describe your goals.
     </div>
 
