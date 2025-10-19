@@ -2,6 +2,25 @@
 <html>
 <head>
   <title>Group Activity App</title>
+  <style>
+    .back-button {
+  background-color: #d3d3d3;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  margin-right: auto;
+}
+
+  </style>
+  
 </head>
 <body style="margin: 0; padding: 0; background-color: #e0e0e0; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;">
 
@@ -9,8 +28,10 @@
   <div style="width: 375px; height: 667px; background: linear-gradient(to bottom, #fce5bb, #a88d5f); border-radius: 30px; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3); padding: 20px; box-sizing: border-box;">
 
     <!-- Group Header -->
-    <div style="background-color: #ddd; text-align: center; padding: 10px; border-radius: 20px; margin-bottom: 20px; font-weight: bold;">
-      Your Group
+    <!-- Group Header with back button inside -->
+    <div style="background-color: #ddd; display: flex; align-items: center; padding: 10px; border-radius: 20px; margin-bottom: 20px; font-weight: bold;">
+        <button class="back-button" aria-label="Go back" onclick="history.back()">←</button>
+        <span style="flex-grow: 1; text-align: center; margin-left: -32px;">Your Group</span>
     </div>
 
     <!-- Icons Row -->

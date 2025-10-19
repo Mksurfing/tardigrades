@@ -233,6 +233,21 @@
       transform: scale(0.95);
     }
   }
+  .groups-button {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  background-color: #d9d9d9;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #444;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
 </style>
 </head>
 <body>
@@ -241,6 +256,9 @@
 
   <!-- Back button stays absolute -->
   <button class="back-button" aria-label="Go back" onclick="location.href='HomePage.html'">←</button>
+  <!-- Groups button on the top-right -->
+  <button class="groups-button" aria-label="Go to Groups" onclick="location.href='groups.html'">Groups</button>
+
 
   <!-- Top section with white background -->
   <div class="top-section">
