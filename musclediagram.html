@@ -7,234 +7,247 @@
 <style>
   body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #fff;
     margin: 0;
-    background: #fff;
+    padding: 0;
   }
 
   main {
     max-width: 420px;
-    margin: 14px auto;
+    margin: 20px auto;
     padding: 0 12px;
   }
 
   .card {
     background: #ffe0b2;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    padding: 16px;
     position: relative;
   }
 
-  .columns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    align-items: flex-start;
-    padding: 14px;
-  }
+        .muscle-buttons button {
+            background: #e1735e;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            color: #ffffff;
+        }
 
-  .left-image, .right-panels {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
+        .muscle-buttons button:focus {
+            outline: 3px solid #e1735e;
+            outline-offset: 2px;
+        }
 
-  .left-image {
-    position: relative;
-  }
-
-  img {
-    width: 100%;
-    border-radius: 8px;
-    display: block;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  }
-
-  svg {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: auto;
-  }
-
-  .svg-label {
-    font-size: 13px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    border: none;
-    background: #e1735e;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .right-panels > div {
-    background: #ffe0b2;
-    border-radius: 8px;
-    padding: 14px;
-    margin-top: 12px;
-    border: 2px solid #000;
-  }
-
-  .right-panels h3 {
-    margin: 0 0 6px 0;
-    font-size: 0.98em;
-    color: #000;
-  }
-
-  #selected-muscle-name {
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-
-  button.home, button.info {
-    position: absolute;
-    top: 24px;
-    padding: 6px 12px;
-    background: #c7934c;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-    z-index: 20;
-  }
-
-  button.home { right: 22px; }
-  button.info { right: 110px; }
-
-  .sr-only {
-    position: absolute !important;
-    height: 1px; width: 1px;
-    overflow: hidden;
-    clip: rect(1px,1px,1px,1px);
-    white-space: nowrap; border: 0; padding: 0; margin: -1px;
-  }
-
-  @media (max-width: 420px) {
-    .columns { flex-direction: column; }
-    .right-panels { margin-top: 12px; }
-    main > .card { overflow: visible; }
-  }
-</style>
+        .sr-only { /* simple visually-hidden helper */
+            position: absolute !important;
+            height: 1px; width: 1px;
+            overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+            white-space: nowrap; border: 0; padding: 0; margin: -1px;
+        }
+        /* Responsive: on small screens stack the image above the panels so the panels are visible immediately */
+        @media (max-width: 420px) {
+            .columns { flex-direction: column !important; }
+            .left-image, .right-panels { width: 100% !important; }
+            .right-panels { margin-top: 12px; }
+            /* ensure the main card can expand vertically and allow scrolling on the page */
+            main > div { overflow: visible; }
+        }
+    </style>
 </head>
-<body>
-<main>
-  <div class="card">
-    <button class="home" onclick="location.href='HomePage.html'">Home</button>
-    <button class="info" id="showInfoBtn">Info</button>
+<body style="font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background-color: #ffffff;">
 
-    <div class="columns">
-      <!-- Left column: image + SVG labels -->
-      <div class="left-image">
-        <img id="diagramImg" src="images/muscleman.png" alt="Human Muscle Diagram showing major anterior muscles with callouts" usemap="#musclemap" aria-describedby="muscle-system-info">
-        <svg viewBox="0 0 420 800" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <marker id="arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
-              <path d="M0,0 L8,4 L0,8 z" fill="#333"/>
-            </marker>
-          </defs>
+    <!-- header removed (user requested blank top) -->
 
-          <!-- Shoulders -->
-          <line x1="140" y1="90" x2="100" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-          <foreignObject x="10" y="36" width="80" height="26">
-            <button class="svg-label" data-muscle="shoulders">Shoulders</button>
-          </foreignObject>
+    <!-- Main app container (phone width) -->
+    <main style="max-width:420px;margin:14px auto;padding:0 12px;">
+    <div style="background:#ffe0b2;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06);overflow:hidden;display:flex;flex-direction:column;position:relative;">
+            <div style="padding:14px; display:flex; flex-direction:column; gap:10px;">
+                <!-- Home button similar to profile example -->
+                <button onclick="window.location.href='HomePage.html'" style="position:absolute;top:24px;right:22px;padding:6px 12px;background:#c7934c;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;z-index:20;">Home</button>
+                <!-- Quick Info jump for users who can't see the panels immediately -->
+                <button id="showInfoBtn" style="position:absolute;top:24px;right:110px;padding:6px 10px;background:#c7934c;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;z-index:20;">Info</button>
+                <!-- title removed (user requested blank top) -->
 
-          <!-- Chest -->
-          <line x1="210" y1="170" x2="260" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-          <foreignObject x="270" y="128" width="70" height="26">
-            <button class="svg-label" data-muscle="chest">Chest</button>
-          </foreignObject>
+                <div style="display:flex;flex-direction:column;gap:14px;">
+                    <div class="columns" style="display:flex;flex-direction:row;gap:18px;align-items:flex-start;flex-wrap:wrap;">
+                        <!-- Left column: image + controls -->
+                        <div class="left-image" style="flex:1 1 100%; max-width:420px; background:transparent; position:relative;">
+                       <img id="diagramImg" src="images/muscleman.png"
+                           alt="Human Muscle Diagram showing major anterior muscles with callouts"
+                           usemap="#musclemap"
+                           role="img"
+                           aria-describedby="muscle-system-info"
+                           style="width:100%;height:auto;display:block;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.06);">
 
-          <!-- Triceps -->
-          <line x1="300" y1="220" x2="340" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-          <foreignObject x="348" y="188" width="70" height="26">
-            <button class="svg-label" data-muscle="triceps">Triceps</button>
-          </foreignObject>
+                            <!-- SVG overlay for arrows/labels; coordinates are in the 420x800 viewBox so they scale with image -->
+                            <svg id="overlay" viewBox="0 0 420 800" preserveAspectRatio="xMidYMid meet" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:auto;">
+                                <defs>
+                                    <marker id="arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+                                        <path d="M0,0 L8,4 L0,8 z" fill="#333" />
+                                    </marker>
+                                </defs>
+                                <!-- Shoulders -->
+                                <line x1="140" y1="90" x2="100" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+                                                                <foreignObject x="10" y="36" width="80" height="26">
+                                                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="shoulders" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Shoulders</button></body>
+                                                                </foreignObject>
 
-          <!-- Biceps -->
-          <line x1="150" y1="215" x2="95" y2="230" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-          <foreignObject x="10" y="236" width="70" height="26">
-            <button class="svg-label" data-muscle="biceps">Biceps</button>
-          </foreignObject>
+                                <!-- Chest -->
+                                <line x1="210" y1="170" x2="260" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+                                <foreignObject x="270" y="128" width="70" height="26">
+                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="chest" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Chest</button></body>
+                                </foreignObject>
 
-          <!-- Quads -->
-          <line x1="250" y1="420" x2="300" y2="470" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
-          <foreignObject x="308" y="472" width="70" height="26">
-            <button class="svg-label" data-muscle="quads">Quads</button>
-          </foreignObject>
-        </svg>
+                                <!-- Triceps (right arm) -->
+                                <line x1="300" y1="220" x2="340" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+                                <foreignObject x="348" y="188" width="70" height="26">
+                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="triceps" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Triceps</button></body>
+                                </foreignObject>
 
-        <map name="musclemap">
-          <area shape="poly" coords="200,100,250,110,260,180,210,190" href="#shoulders-info" data-muscle="shoulders">
-          <area shape="rect" coords="260,150,340,220" href="#chest-info" data-muscle="chest">
-          <area shape="rect" coords="300,450,380,580" href="#quads-info" data-muscle="quads">
-        </map>
-      </div>
+                                <!-- Biceps (left arm) -->
+                                <line x1="150" y1="215" x2="95" y2="230" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+                                <foreignObject x="10" y="236" width="70" height="26">
+                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="biceps" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Biceps</button></body>
+                                </foreignObject>
 
-      <!-- Right column: info panels -->
-      <div class="right-panels">
-        <div>
-          <h3>Information about the muscular system</h3>
-          <p id="muscle-system-info">The muscular system provides movement, posture, and heat generation. It's broadly categorized into skeletal, cardiac, and smooth muscle tissues.</p>
+                                <!-- Quads -->
+                                <line x1="250" y1="420" x2="300" y2="470" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
+                                <foreignObject x="308" y="472" width="70" height="26">
+                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="quads" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Quads</button></body>
+                                </foreignObject>
+                            </svg>
+
+                            <map name="musclemap">
+                                <area shape="poly" coords="200,100,250,110,260,180,210,190" href="#shoulders-info" alt="Shoulders" data-muscle="shoulders">
+                                <area shape="rect" coords="260,150,340,220" href="#chest-info" alt="Chest" data-muscle="chest">
+                                <area shape="rect" coords="300,450,380,580" href="#quads-info" alt="Quads" data-muscle="quads">
+                            </map>
+
+                            <!-- top control buttons removed because labels act as buttons now -->
+                        </div>
+
+                        <!-- Right column: info panels -->
+                        <div class="right-panels" style="flex:1 1 100%; min-width:0;">
+                            <div style="background:#ffe0b2;padding:18px;border-radius:8px;border:2px solid #000000;">
+                                <h3 style="margin:0 0 8px 0;color:#000000;font-size:0.98em;">Information about the muscular system</h3>
+                                <p id="muscle-system-info" style="margin:0;font-size:0.9em;line-height:1.4;">The muscular system provides movement, posture, and heat generation. It's broadly categorized into skeletal, cardiac, and smooth muscle tissues.</p>
+                            </div>
+
+                            <div style="background:#ffe0b2;border-radius:8px;padding:14px;margin-top:12px;box-shadow:0 1px 2px rgba(0,0,0,0.04);min-height:120px;border:2px solid #000000;">
+                                <h3 style="margin:0 0 6px 0;color:#000000;font-size:0.98em;">Specific muscle selected and exercises</h3>
+                                <div id="selected-muscle-name" style="font-weight:600;color:#000000;margin-bottom:6px;">No muscle selected</div>
+                                <p id="selected-muscle-info" style="margin:0;font-size:0.9em;line-height:1.4;">Tap on a muscle in the diagram above (or use the buttons) to view its function and suggested exercises.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </main>
 
-        <div>
-          <h3>Specific muscle selected and exercises</h3>
-          <div id="selected-muscle-name">No muscle selected</div>
-          <p id="selected-muscle-info">Tap on a muscle in the diagram above (or use the buttons) to view its function and suggested exercises.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
+    <div class="sr-only" aria-live="polite" id="aria-announcer">No muscle selected</div>
 
-<div class="sr-only" aria-live="polite" id="aria-announcer">No muscle selected</div>
+    <script>
+        // Small dataset of muscles. You can expand this with more muscles and richer content.
+        const muscleData = {
+            shoulders: {
+                name: 'Shoulders (Deltoids)',
+                function: 'Assist with arm abduction, rotation and overhead motions.',
+                exercises: ['Overhead press', 'Lateral raises', 'Front raises']
+            },
+            chest: {
+                name: 'Chest (Pectoralis Major)',
+                function: 'Primary muscle for pushing movements and arm flexion across the body.',
+                exercises: ['Bench press', 'Push-ups', 'Chest flyes']
+            },
+            triceps: {
+                name: 'Triceps',
+                function: 'Extends the elbow and assists shoulder stabilization.',
+                exercises: ['Triceps dips', 'Triceps pushdown', 'Overhead triceps extension']
+            },
+            biceps: {
+                name: 'Biceps',
+                function: 'Flexes the elbow and supinates the forearm.',
+                exercises: ['Biceps curls', 'Hammer curls', 'Chin-ups']
+            },
+            quads: {
+                name: 'Quadriceps',
+                function: 'Extend the knee and aid in hip flexion; important for walking, running, and squatting.',
+                exercises: ['Squats', 'Lunges', 'Leg press']
+            }
+        };
 
-<script>
-const muscleData = {
-  shoulders: {name:'Shoulders (Deltoids)',function:'Assist with arm abduction, rotation and overhead motions.',exercises:['Overhead press','Lateral raises','Front raises']},
-  chest: {name:'Chest (Pectoralis Major)',function:'Primary muscle for pushing movements and arm flexion across the body.',exercises:['Bench press','Push-ups','Chest flyes']},
-  triceps: {name:'Triceps',function:'Extends the elbow and assists shoulder stabilization.',exercises:['Triceps dips','Triceps pushdown','Overhead triceps extension']},
-  biceps: {name:'Biceps',function:'Flexes the elbow and supinates the forearm.',exercises:['Biceps curls','Hammer curls','Chin-ups']},
-  quads: {name:'Quadriceps',function:'Extend the knee and aid in hip flexion; important for walking, running, and squatting.',exercises:['Squats','Lunges','Leg press']}
-};
+        const infoNameEl = document.getElementById('selected-muscle-name');
+        const infoEl = document.getElementById('selected-muscle-info');
 
-const nameEl = document.getElementById('selected-muscle-name');
-const infoEl = document.getElementById('selected-muscle-info');
-const announcer = document.getElementById('aria-announcer');
+        function showMuscle(muscleKey) {
+            const data = muscleData[muscleKey];
+            if (!data) {
+                infoNameEl.textContent = 'No muscle selected';
+                infoEl.textContent = 'Tap on a muscle in the diagram above (or use the buttons) to view its function and suggested exercises.';
+                return;
+            }
 
-function showMuscle(key) {
-  if (!key || !muscleData[key]) {
-    nameEl.textContent = 'No muscle selected';
-    infoEl.textContent = 'Tap on a muscle in the diagram above (or use the buttons) to view its function and suggested exercises.';
-    announcer.textContent = 'No muscle selected';
-    return;
-  }
-  const m = muscleData[key];
-  nameEl.textContent = m.name;
-  infoEl.innerHTML = `<strong>Primary function:</strong> ${m.function}<br><strong>Recommended exercises:</strong> ${m.exercises.join(', ')}`;
-  announcer.textContent = `${m.name} selected`;
-}
+            infoNameEl.textContent = data.name;
+            infoEl.innerHTML = `<strong>Primary function:</strong> ${data.function}<br><strong>Recommended exercises:</strong> ${data.exercises.join(', ')}`;
+        }
 
-// SVG buttons
-document.querySelectorAll('.svg-label').forEach(btn=>{
-  btn.addEventListener('click',()=>showMuscle(btn.dataset.muscle));
-});
+        // Wire up area clicks (image map)
+        // Make the <area> elements interactive and keyboard-accessible where possible
+        document.querySelectorAll('map[name="musclemap"] area').forEach(area => {
+            // make focusable in browsers that support it
+            try { area.setAttribute('tabindex', '0'); } catch (e) {}
 
-// Image map areas
-document.querySelectorAll('map[name="musclemap"] area').forEach(area=>{
-  area.tabIndex = 0;
-  area.addEventListener('click', e=>{ e.preventDefault(); showMuscle(area.dataset.muscle); });
-  area.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); showMuscle(area.dataset.muscle); } });
-});
+            area.addEventListener('click', (e) => {
+                e.preventDefault();
+                const key = area.dataset.muscle;
+                if (key) showMuscle(key);
+            });
 
-// Info button scroll
-document.getElementById('showInfoBtn').addEventListener('click',()=>{
-  document.querySelector('.right-panels').scrollIntoView({behavior:'smooth', block:'start'});
-});
+            area.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const key = area.dataset.muscle;
+                    if (key) showMuscle(key);
+                }
+            });
+        });
 
-// Initialize default state
-showMuscle();
-</script>
+        // Wire up accessible buttons (legacy) - removed; instead wire SVG label buttons
+        document.querySelectorAll('.svg-label').forEach(btn => {
+            // these are HTML buttons embedded via foreignObject in the SVG
+            btn.addEventListener('click', (e) => {
+                const key = btn.dataset.muscle;
+                showMuscle(key);
+                // also update aria-announcer
+                const announcer = document.getElementById('aria-announcer');
+                if (announcer) announcer.textContent = (muscleData[key] && muscleData[key].name) ? muscleData[key].name + ' selected' : 'No muscle selected';
+            });
+        });
+
+        // Initialize default state
+        showMuscle();
+
+        // Announce changes for screen readers
+        const announcer = document.getElementById('aria-announcer');
+        const originalShowMuscle = showMuscle;
+        window.showMuscle = function(muscleKey) {
+            originalShowMuscle(muscleKey);
+            const text = muscleKey && muscleData[muscleKey] ? muscleData[muscleKey].name + ' selected' : 'No muscle selected';
+            if (announcer) announcer.textContent = text;
+        };
+
+        // Info button: scroll to the info panels for users who can't see them
+        const infoBtn = document.getElementById('showInfoBtn');
+        if (infoBtn) {
+            infoBtn.addEventListener('click', () => {
+                const panels = document.querySelector('.right-panels');
+                if (panels) panels.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+    </script>
 </body>
 </html>
