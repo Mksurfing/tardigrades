@@ -45,6 +45,7 @@
     <!-- Input -->
     <input 
       type="text" 
+      id="goalInput"
       placeholder="Describe your goals..." 
       style="
         width: 100%;
@@ -62,7 +63,7 @@
     <div style="width: 100%; margin-top: 30px; color: black; font-weight: bold; font-size: 16px;">Kronos:</div>
 
     <!-- AI Response Box -->
-    <div style="
+    <div id="responseBox" style="
       width: 100%;
       height: 300px;
       background: white;
@@ -77,7 +78,75 @@
       Your workout plan will appear here after you describe your goals.
     </div>
 
+    <!-- Generate Button -->
+    <button id="generateBtn" style="
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #264653;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    ">Generate Plan</button>
+
   </div>
+
+  <script>
+    const generateBtn = document.getElementById('generateBtn');
+    const goalInput = document.getElementById('goalInput');
+    const responseBox = document.getElementById('responseBox');
+
+    // Example fitness plan generator
+    const plans = {
+      "lose weight": `
+- Cardio: 30 min running or cycling
+- Strength: 3x full body circuits
+- Core: 10 min ab exercises
+- Rest: 1-2 days/week
+      `,
+      "build muscle": `
+- Strength: 5x/week weightlifting (split by muscle groups)
+- Cardio: 15-20 min HIIT, 2x/week
+- Nutrition: High protein diet
+- Rest: 1-2 days/week
+      `,
+      "increase endurance": `
+- Cardio: 45-60 min running, cycling, or swimming
+- Interval training: 2x/week
+- Strength: 2-3x/week light weights
+- Stretching: Daily 10 min
+      `,
+      "flexibility": `
+- Yoga: 30-60 min/day
+- Stretching: 15 min before and after workouts
+- Mobility drills: 3x/week
+- Optional: Pilates 1-2x/week
+      `,
+    };
+
+    generateBtn.addEventListener('click', () => {
+      const goal = goalInput.value.toLowerCase().trim();
+      if (!goal) {
+        responseBox.textContent = "Please enter your fitness goal!";
+        return;
+      }
+
+      // Find a matching plan or default
+      let planFound = false;
+      for (const key in plans) {
+        if (goal.includes(key)) {
+          responseBox.textContent = plans[key];
+          planFound = true;
+          break;
+        }
+      }
+
+      if (!planFound) {
+        responseBox.textContent = "Custom plan: Mix cardio, strength, and stretching based on your needs!";
+      }
+    });
+  </script>
 
 </body>
 </html>
