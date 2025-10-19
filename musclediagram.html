@@ -57,6 +57,8 @@
             <div style="padding:14px; display:flex; flex-direction:column; gap:10px;">
                 <!-- Home button similar to profile example -->
                 <button onclick="window.location.href='HomePage.html'" style="position:absolute;top:24px;right:22px;padding:6px 12px;background:#c7934c;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;z-index:20;">Home</button>
+                <!-- Quick Info jump for users who can't see the panels immediately -->
+                <button id="showInfoBtn" style="position:absolute;top:24px;right:110px;padding:6px 10px;background:#c7934c;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;z-index:20;">Info</button>
                 <!-- title removed (user requested blank top) -->
 
                 <div style="display:flex;flex-direction:column;gap:14px;">
@@ -227,6 +229,15 @@
             const text = muscleKey && muscleData[muscleKey] ? muscleData[muscleKey].name + ' selected' : 'No muscle selected';
             if (announcer) announcer.textContent = text;
         };
+
+        // Info button: scroll to the info panels for users who can't see them
+        const infoBtn = document.getElementById('showInfoBtn');
+        if (infoBtn) {
+            infoBtn.addEventListener('click', () => {
+                const panels = document.querySelector('.right-panels');
+                if (panels) panels.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
     </script>
 </body>
 </html>
