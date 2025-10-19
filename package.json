@@ -1,6 +1,27 @@
 {
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+    "express": "^5.1.0",
     "kronoslabs": "^1.1.2"
-  }
+  },
+  "name": "tardigrades",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Ai-Implementation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mksurfing/tardigrades.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mksurfing/tardigrades/issues"
+  },
+  "homepage": "https://github.com/Mksurfing/tardigrades#readme"
 }

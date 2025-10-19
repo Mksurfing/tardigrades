@@ -16,7 +16,6 @@
     overflow: hidden;
     position: relative;
     padding: 20px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,53 +96,33 @@
     const goalInput = document.getElementById('goalInput');
     const responseBox = document.getElementById('responseBox');
 
-    // Example fitness plan generator
-    const plans = {
-      "lose weight": `
-- Cardio: 30 min running or cycling
-- Strength: 3x full body circuits
-- Core: 10 min ab exercises
-- Rest: 1-2 days/week
-      `,
-      "build muscle": `
-- Strength: 5x/week weightlifting (split by muscle groups)
-- Cardio: 15-20 min HIIT, 2x/week
-- Nutrition: High protein diet
-- Rest: 1-2 days/week
-      `,
-      "increase endurance": `
-- Cardio: 45-60 min running, cycling, or swimming
-- Interval training: 2x/week
-- Strength: 2-3x/week light weights
-- Stretching: Daily 10 min
-      `,
-      "flexibility": `
-- Yoga: 30-60 min/day
-- Stretching: 15 min before and after workouts
-- Mobility drills: 3x/week
-- Optional: Pilates 1-2x/week
-      `,
-    };
-
-    generateBtn.addEventListener('click', () => {
-      const goal = goalInput.value.toLowerCase().trim();
+    generateBtn.addEventListener('click', async () => {
+      const goal = goalInput.value.trim();
       if (!goal) {
         responseBox.textContent = "Please enter your fitness goal!";
         return;
       }
 
-      // Find a matching plan or default
-      let planFound = false;
-      for (const key in plans) {
-        if (goal.includes(key)) {
-          responseBox.textContent = plans[key];
-          planFound = true;
-          break;
-        }
-      }
+      responseBox.textContent = "Generating plan...";
 
-      if (!planFound) {
-        responseBox.textContent = "Custom plan: Mix cardio, strength, and stretching based on your needs!";
+      try {
+        const res = await fetch("http://localhost:3000/api/fitness", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ goal })
+        });
+
+        const data = await res.json();
+        if (data.plan) {
+          responseBox.textContent = data.plan;
+        } else if (data.error) {
+          responseBox.textContent = "Error: " + data.error;
+        } else {
+          responseBox.textContent = "Unexpected response from server.";
+        }
+      } catch (err) {
+        responseBox.textContent = "Error connecting to server.";
+        console.error(err);
       }
     });
   </script>

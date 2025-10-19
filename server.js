@@ -1,16 +1,27 @@
-// Minimal backend with Express
 import express from "express";
 import cors from "cors";
 import { KronosLabs, KronosLabsError } from "kronoslabs";
+import dotenv from "dotenv";
+
+// Load environment variables from .env
+dotenv.config({ path: './.gitignore/config/.env', debug: true });
+
+const ApiKey = process.env.API_KEY;
+const port = process.env.PORT || 3000;
+
+if (!ApiKey) {
+  console.error("API_KEY not found in environment variables!");
+  process.exit(1); // Stop the server if no key
+}
+
+// Initialize KronosLabs client
+const client = new KronosLabs({ apiKey: ApiKey });
 
 const app = express();
-app.use(cors()); // Allow frontend requests
-app.use(express.json()); // Parse JSON bodies
+app.use(cors());
+app.use(express.json());
 
-// Initialize KronosLabs
-const client = new KronosLabs({ apiKey: "YOUR_API_KEY_HERE" });
-
-// Endpoint to get AI fitness plan
+// Endpoint to generate AI fitness plan
 app.post("/api/fitness", async (req, res) => {
   const { goal } = req.body;
 
@@ -37,6 +48,6 @@ app.post("/api/fitness", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Backend running at http://localhost:3000");
+app.listen(port, () => {
+  console.log(`Backend running at http://localhost:${port}`);
 });
