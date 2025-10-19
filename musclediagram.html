@@ -45,6 +45,13 @@
             /* ensure the main card can expand vertically and allow scrolling on the page */
             main > div { overflow: visible; }
         }
+        /* Reusable top button style (Home, Info) */
+        .btn-top { position:absolute;padding:6px 12px;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;z-index:20; }
+        /* small variation for the smaller Info button */
+        .btn-top.info { padding:6px 10px; }
+        /* style for svg-embedded label buttons */
+        .svg-label { font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer; }
+        .svg-label:focus { outline: 3px solid #e1735e; outline-offset: 2px; }
     </style>
 </head>
 <body style="font-family: 'Helvetica Neue', Arial, sans-serif; margin: 0; padding: 0; background-color: #ffffff;">
@@ -56,9 +63,9 @@
     <div style="background:#ffe0b2;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06);overflow:hidden;display:flex;flex-direction:column;position:relative;">
             <div style="padding:14px; display:flex; flex-direction:column; gap:10px;">
                 <!-- Home button similar to profile example -->
-                <button onclick="window.location.href='HomePage.html'" style="position:absolute;top:24px;right:22px;padding:6px 12px;background:#c7934c;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;z-index:20;">Home</button>
+                <button class="btn-top" onclick="window.location.href='HomePage.html'" style="top:24px;right:22px;background:#c7934c;">Home</button>
                 <!-- Quick Info jump for users who can't see the panels immediately -->
-                <button id="showInfoBtn" style="position:absolute;top:24px;right:110px;padding:6px 10px;background:#c7934c;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;z-index:20;">Info</button>
+                <button id="showInfoBtn" class="btn-top info" style="top:24px;right:110px;background:#c7934c;">Info</button>
                 <!-- title removed (user requested blank top) -->
 
                 <div style="display:flex;flex-direction:column;gap:14px;">
@@ -82,31 +89,31 @@
                                 <!-- Shoulders -->
                                 <line x1="140" y1="90" x2="100" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
                                                                 <foreignObject x="10" y="36" width="80" height="26">
-                                                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="shoulders" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Shoulders</button></body>
-                                                                </foreignObject>
+                                                                                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="shoulders">Shoulders</button></body>
+                                                                                                </foreignObject>
 
                                 <!-- Chest -->
                                 <line x1="210" y1="170" x2="260" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
                                 <foreignObject x="270" y="128" width="70" height="26">
-                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="chest" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Chest</button></body>
+                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="chest">Chest</button></body>
                                 </foreignObject>
 
                                 <!-- Triceps (right arm) -->
                                 <line x1="300" y1="220" x2="340" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
                                 <foreignObject x="348" y="188" width="70" height="26">
-                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="triceps" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Triceps</button></body>
+                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="triceps">Triceps</button></body>
                                 </foreignObject>
 
                                 <!-- Biceps (left arm) -->
                                 <line x1="150" y1="215" x2="95" y2="230" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
                                 <foreignObject x="10" y="236" width="70" height="26">
-                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="biceps" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Biceps</button></body>
+                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="biceps">Biceps</button></body>
                                 </foreignObject>
 
                                 <!-- Quads -->
                                 <line x1="250" y1="420" x2="300" y2="470" stroke="#333" stroke-width="2" marker-end="url(#arrow)" />
                                 <foreignObject x="308" y="472" width="70" height="26">
-                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="quads" style="font-size:13px;padding:4px 8px;border-radius:6px;border:none;background:#e1735e;color:#fff;cursor:pointer;">Quads</button></body>
+                                    <body xmlns="http://www.w3.org/1999/xhtml"><button class="svg-label" data-muscle="quads">Quads</button></body>
                                 </foreignObject>
                             </svg>
 
